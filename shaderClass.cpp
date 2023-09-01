@@ -74,5 +74,4 @@ void Shader::compileErrors(unsigned int shader, const char* type) {
 			std::cout << "SHADER_LINKING_ERROR for : " << type << "\n" << std::endl;
 		}
 	}
-	}
 }
