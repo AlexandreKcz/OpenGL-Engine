@@ -1,7 +1,2 @@
 ﻿  Main.cpp
-  Texture.cpp
-C:\Users\myale\OneDrive\Documents\Perso\Projet Perso\Open GL\OpenGL Engine\Texture.cpp(10,9): warning C4101: 'texture' : variable locale non référencée
-  VAO.cpp
-C:\Users\myale\OneDrive\Documents\Perso\Projet Perso\Open GL\OpenGL Engine\VAO.cpp(10,63): warning C4244: 'argument' : conversion de 'GLsizeiptr' en 'GLsizei', perte possible de données
-  Génération de code en cours...
   OpenGL Engine.vcxproj -> C:\Users\myale\OneDrive\Documents\Perso\Projet Perso\Open GL\OpenGL Engine\x64\Debug\OpenGL Engine.exe
