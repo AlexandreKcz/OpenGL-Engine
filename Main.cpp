@@ -7,6 +7,7 @@
 #include"VAO.h"
 #include"VBO.h"
 #include"EBO.h"
+#include"Texture.h"
 
 //Coordonees des vertices (il triangulo)
 GLfloat vertices[] = {
@@ -64,36 +65,8 @@ int main() {
 
 	GLuint uniID = glGetUniformLocation(shaderProgram.ID, "scale");
 
-	//Texture
-
-	int widthImg, heightImg, numColCh;
-	stbi_set_flip_vertically_on_load(true);
-	unsigned char* bytes = stbi_load("Vittor.png", &widthImg, &heightImg, &numColCh, 0);
-
-	GLuint texture;
-	glGenTextures(1, &texture);
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, texture);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-	//Pour une bordure plutot qu'un repeat : 
-	// float flatColor[] = {1.0f, 1.0f, 1.0f, 1.0f};
-	// glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, flatColor);
-
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, widthImg, heightImg, 0, GL_RGB, GL_UNSIGNED_BYTE, bytes);
-	glGenerateMipmap(GL_TEXTURE_2D);
-
-	stbi_image_free(bytes);
-	glBindTexture(GL_TEXTURE_2D, 0);
-
-	GLuint tex0Uni = glGetUniformLocation(shaderProgram.ID, "tex0");
-	shaderProgram.Activate();
-	glUniform1i(tex0Uni, 0);
+	Texture vittor("Vittor.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGB, GL_UNSIGNED_BYTE);
+	vittor.texUnit(shaderProgram, "tex0", 0);
 
 	while (!glfwWindowShouldClose(window)) {
 
@@ -101,7 +74,7 @@ int main() {
 		glClear(GL_COLOR_BUFFER_BIT);
 		shaderProgram.Activate();
 		glUniform1f(uniID, 0);
-		glBindTexture(GL_TEXTURE_2D, texture);
+		vittor.Bind();
 		VAO1.Bind();
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		glfwSwapBuffers(window);
@@ -112,7 +85,7 @@ int main() {
 	VAO1.Delete();
 	VBO1.Delete();
 	EBO1.Delete();
-	glDeleteTextures(1, &texture);
+	vittor.Delete();
 	shaderProgram.Delete();
 
 	glfwDestroyWindow(window);

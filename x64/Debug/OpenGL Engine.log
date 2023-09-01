@@ -1,2 +1,5 @@
 ﻿  Main.cpp
+  Texture.cpp
+C:\Users\myale\OneDrive\Documents\Perso\Projet Perso\Open GL\OpenGL Engine\Texture.cpp(10,9): warning C4101: 'texture' : variable locale non référencée
+  Génération de code en cours...
   OpenGL Engine.vcxproj -> C:\Users\myale\OneDrive\Documents\Perso\Projet Perso\Open GL\OpenGL Engine\x64\Debug\OpenGL Engine.exe
