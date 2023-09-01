@@ -6,10 +6,12 @@ int main() {
 
 	glfwInit();
 
+	/* Specifie version + profile OGL */
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
+	/*creation fenetre*/
 	GLFWwindow* window = glfwCreateWindow(800, 800, "Open GL Engine", NULL, NULL);
 	if (window == NULL) {
 		glfwTerminate();
@@ -26,7 +28,7 @@ int main() {
 	glfwSwapBuffers(window);
 
 	while (!glfwWindowShouldClose(window)) {
-		glfwPollEvents();
+		glfwPollEvents(); //Gere les evenements de la fenetre
 	}
 
 	glfwDestroyWindow(window);
