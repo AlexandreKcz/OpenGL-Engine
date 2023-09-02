@@ -11,6 +11,14 @@
 #include"VBO.h"
 #include"EBO.h"
 #include"Texture.h"
+#include <wtypes.h>
+
+/* pour activer le gpu nvidia ? (les uv bug bruh)
+extern "C"
+{
+	//__declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 1;
+	__declspec(dllexport) DWORD NvOptimusEnablement = 0x00000001;
+}*/
 
 const unsigned int width = 800;
 const unsigned int height = 800;
@@ -18,11 +26,11 @@ const unsigned int height = 800;
 //Coordonees des vertices (il triangulo)
 GLfloat vertices[] = {
 	/* Coordonees :				Couleurs : 	*/
-	-0.5f,	0.0f,	0.5f,	0.83f, 0.70f, 0.44f,	0.0f,	0.0f,
-	-0.5f,	0.0f,	-0.5f,	0.83f, 0.70f, 0.44f,	5.0f,	0.0f,
-	0.5f,	0.0f,	-0.5f,	0.83f, 0.70f, 0.44f,	0.0f,	0.0f,
-	0.5f,	0.0f,	0.5f,	0.83f, 0.70f, 0.44f,	5.0f,	0.0f,
-	0.0f,	0.8f,	0.0f,	0.92f,0.86f,  0.76f,	2.5f,	5.0f
+	-0.5f,	0.0f,	0.5f,		0.83f, 0.70f, 0.44f,	0.0f,	0.0f,
+	-0.5f,	0.0f,	-0.5f,		0.83f, 0.70f, 0.44f,	5.0f,	0.0f,
+	0.5f,	0.0f,	-0.5f,		0.83f, 0.70f, 0.44f,	0.0f,	0.0f,
+	0.5f,	0.0f,	0.5f,		0.83f, 0.70f, 0.44f,	5.0f,	0.0f,
+	0.0f,	0.8f,	0.0f,		0.92f, 0.86f, 0.76f,	2.5f,	5.0f
 };
 
 GLuint indices[] = {
@@ -34,6 +42,18 @@ GLuint indices[] = {
 	3, 0, 4
 };
 
+/* QUAD
+GLfloat vertices[] = {
+	-0.5f,	-0.5f,	0.0f,		0.83f, 0.70f, 0.44f,	0.0f,	0.0f,
+	-0.5f,	0.5f,	0.0f,		0.83f, 0.70f, 0.44f,	0.0f,	1.0f,
+	0.5f,	0.5f,	0.0f,		0.83f, 0.70f, 0.44f,	1.0f,	1.0f,
+	0.5f,	-0.5f,	0.0f,		0.83f, 0.70f, 0.44f,	1.0f,	0.0f,
+};
+
+GLuint indices[] = {
+	0, 2, 1,
+	0, 3, 2,
+};*/
 
 
 int main() {
@@ -44,6 +64,8 @@ int main() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	//glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_EGL_CONTEXT_API);
+	//glfwWindowHint(GLFW_EGL_DEVICE_EXT, 1);
 
 
 	/*creation fenetre*/
