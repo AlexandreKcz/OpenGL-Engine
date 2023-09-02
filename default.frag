@@ -5,11 +5,29 @@ in vec3 color;
 
 in vec2 texCoord;
 
+in vec3 Normal;
+in vec3 crntPos;
+
 uniform sampler2D tex0;
+
+uniform vec4 lightColor;
+uniform vec3 lightPos;
+uniform vec3 camPos;
 
 void main()
 {
-	//FragColor = vec4(color, 1.0f);
-	//gl_FragColor = vec4(texCoord, 0.0, 1.0);
-	FragColor = texture(tex0, texCoord);
+	float ambiant = 0.20f;
+	
+	vec3 normal = normalize(Normal);
+	vec3 lightDirection = normalize(lightPos - crntPos);
+
+	float diffuse = max(dot(normal, lightDirection), 0.0f);
+
+	float specularLight = 0.50f;
+	vec3 viewDirection = normalize(camPos - crntPos);
+	vec3 reflectionDirection = reflect(-lightDirection, normal);
+	float specAmount = pow(max(dot(viewDirection, reflectionDirection), 0.0f), 8);
+	float specular = specAmount * specularLight;
+
+	FragColor = texture(tex0, texCoord) * lightColor * (diffuse + ambiant + specular);
 }
