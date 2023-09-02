@@ -118,7 +118,9 @@ int main() {
 		crntTime = glfwGetTime();
 		timeDiff = crntTime - prevTime;
 		counter++;
+		//Fixed Update
 		if (timeDiff >= 1.0 / 120.0) {
+
 			std::string FPS = std::to_string((1.0 / timeDiff) * counter);
 			std::string ms = std::to_string((timeDiff / counter) * 1000);
 			std::string windowTitle = "OpenGL Engine : " + FPS + " FPS / " + ms + " ms";
