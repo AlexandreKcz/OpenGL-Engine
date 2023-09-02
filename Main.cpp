@@ -11,8 +11,9 @@
 #include"VBO.h"
 #include"EBO.h"
 #include"Texture.h"
-#include <wtypes.h>
+#include"Camera.h"
 
+//#include <wtypes.h> //pour DWORD pour le gpu nvidia
 /* pour activer le gpu nvidia ? (les uv bug bruh)
 extern "C"
 {
@@ -27,10 +28,10 @@ const unsigned int height = 800;
 GLfloat vertices[] = {
 	/* Coordonees :				Couleurs : 	*/
 	-0.5f,	0.0f,	0.5f,		0.83f, 0.70f, 0.44f,	0.0f,	0.0f,
-	-0.5f,	0.0f,	-0.5f,		0.83f, 0.70f, 0.44f,	5.0f,	0.0f,
+	-0.5f,	0.0f,	-0.5f,		0.83f, 0.70f, 0.44f,	1.0f,	0.0f,
 	0.5f,	0.0f,	-0.5f,		0.83f, 0.70f, 0.44f,	0.0f,	0.0f,
-	0.5f,	0.0f,	0.5f,		0.83f, 0.70f, 0.44f,	5.0f,	0.0f,
-	0.0f,	0.8f,	0.0f,		0.92f, 0.86f, 0.76f,	2.5f,	5.0f
+	0.5f,	0.0f,	0.5f,		0.83f, 0.70f, 0.44f,	1.0f,	0.0f,
+	0.0f,	0.8f,	0.0f,		0.92f, 0.86f, 0.76f,	0.5f,	1.0f
 };
 
 GLuint indices[] = {
@@ -101,39 +102,38 @@ int main() {
 	Texture vittor("Vittor.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGB, GL_UNSIGNED_BYTE);
 	vittor.texUnit(shaderProgram, "tex0", 0);
 
-	float rotation = 0.0f;
-	double prevTime = glfwGetTime();
+	float prevTime = 0.0;
+	double crntTime = 0.0;
+	double timeDiff;
+	unsigned int counter = 0;
+
+	glfwSwapInterval(0);
 
 	glEnable(GL_DEPTH_TEST);
 
+	Camera camera(width, height, glm::vec3(0.0f, 0.0f, 2.0f));
+
 	while (!glfwWindowShouldClose(window)) {
+
+		crntTime = glfwGetTime();
+		timeDiff = crntTime - prevTime;
+		counter++;
+		if (timeDiff >= 1.0 / 120.0) {
+			std::string FPS = std::to_string((1.0 / timeDiff) * counter);
+			std::string ms = std::to_string((timeDiff / counter) * 1000);
+			std::string windowTitle = "OpenGL Engine : " + FPS + " FPS / " + ms + " ms";
+			glfwSetWindowTitle(window, windowTitle.c_str());
+			prevTime = crntTime;
+			counter = 0;
+			camera.Inputs(window);
+		}
 
 		glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		shaderProgram.Activate();
 
-		double crntTime = glfwGetTime();
-		if (crntTime - prevTime >= 1 / 60) {
-			rotation += 0.5f;
-			prevTime = crntTime;
-		}
+		camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix");
 
-		glm::mat4 model = glm::mat4(1.0f);
-		glm::mat4 view = glm::mat4(1.0f);
-		glm::mat4 proj = glm::mat4(1.0f);
-
-		model = glm::rotate(model, glm::radians(rotation), glm::vec3(0.0f, 1.0f, 0.0f));
-		view = glm::translate(view, glm::vec3(0.0f, -0.5f, -2.0f));
-		proj = glm::perspective(glm::radians(45.0f), (float)(width / height), 0.1f, 100.0f);
-
-		int modelLoc = glGetUniformLocation(shaderProgram.ID, "model");
-		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-		int viewlLoc = glGetUniformLocation(shaderProgram.ID, "view");
-		glUniformMatrix4fv(viewlLoc, 1, GL_FALSE, glm::value_ptr(view));
-		int projlLoc = glGetUniformLocation(shaderProgram.ID, "proj");
-		glUniformMatrix4fv(projlLoc, 1, GL_FALSE, glm::value_ptr(proj));
-
-		glUniform1f(uniID, 0);
 		vittor.Bind();
 		VAO1.Bind();
 		glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(int), GL_UNSIGNED_INT, 0);
