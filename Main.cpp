@@ -1,17 +1,4 @@
-#include<iostream>
-#include<glad/glad.h>
-#include<GLFW/glfw3.h>
-#include<stb/stb_image.h>
-#include<glm/glm.hpp>
-#include<glm/gtc/matrix_transform.hpp>
-#include<glm/gtc/type_ptr.hpp>
-
-#include"shaderClass.h"
-#include"VAO.h"
-#include"VBO.h"
-#include"EBO.h"
-#include"Texture.h"
-#include"Camera.h"
+#include"Mesh.h"
 
 #include <wtypes.h> //pour DWORD pour le gpu nvidia
 /* pour activer le gpu nvidia ? (les uv bug bruh)*/
@@ -25,7 +12,50 @@ const unsigned int width = 800;
 const unsigned int height = 800;
 
 
-//Plane
+Vertex vertices[] =
+{
+	Vertex{glm::vec3(-1.0f, 0.0f,  1.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 0.0f)},
+	Vertex{glm::vec3(-1.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 1.0f)},
+	Vertex{glm::vec3(1.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 1.0f)},
+	Vertex{glm::vec3(1.0f, 0.0f,  1.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 0.0f)}
+};
+
+GLuint indices[] =
+{
+	0, 1, 2,
+	0, 2, 3
+};
+
+Vertex lightVertices[] =
+{ //     COORDINATES     //
+	Vertex{glm::vec3(-0.1f, -0.1f,  0.1f)},
+	Vertex{glm::vec3(-0.1f, -0.1f, -0.1f)},
+	Vertex{glm::vec3(0.1f, -0.1f, -0.1f)},
+	Vertex{glm::vec3(0.1f, -0.1f,  0.1f)},
+	Vertex{glm::vec3(-0.1f,  0.1f,  0.1f)},
+	Vertex{glm::vec3(-0.1f,  0.1f, -0.1f)},
+	Vertex{glm::vec3(0.1f,  0.1f, -0.1f)},
+	Vertex{glm::vec3(0.1f,  0.1f,  0.1f)}
+};
+
+GLuint lightIndices[] =
+{
+	0, 1, 2,
+	0, 2, 3,
+	0, 4, 7,
+	0, 7, 3,
+	3, 7, 6,
+	3, 6, 2,
+	2, 6, 5,
+	2, 5, 1,
+	1, 5, 4,
+	1, 4, 0,
+	4, 5, 6,
+	4, 6, 7
+};
+
+//Plane Old 
+/*
 GLfloat vertices[] = {
 	-1.0f,	0.0f,	1.0f,		0.0f,	0.0f,	0.0f,		0.0f,	0.0f,		0.0f,	1.0f,	0.0f,
 	-1.0f,	0.0f,	-1.0f,		0.0f,	0.0f,	0.0f,		0.0f,	1.0f,		0.0f,	1.0f,	0.0f,
@@ -36,7 +66,7 @@ GLfloat vertices[] = {
 GLuint indices[] = {
 	0,1,2,
 	0,2,3
-};
+};*/
 
 //Coordonees des vertices (il piramido)
 /*
@@ -73,6 +103,7 @@ GLuint indices[] = {
 	13,15,14
 };*/
 
+/*
 GLfloat lightVertices[] = {
 	-0.1f, -0.1f, 0.1f,
 	-0.1f, -0.1f, -0.1f,
@@ -97,7 +128,7 @@ GLuint lightIndices[] = {
 	1, 4, 0,
 	4, 5, 6,
 	4, 6, 7
-};
+};*/
 
 /* QUAD
 GLfloat vertices[] = {
@@ -137,36 +168,25 @@ int main() {
 
 	glViewport(0, 0, width, height);
 
+	Texture textures[]
+	{
+		Texture("Vittor.png", "diffuse", 0, GL_RGB, GL_UNSIGNED_BYTE),
+		Texture("Vittor_Specular.png", "specular", 1, GL_RED, GL_UNSIGNED_BYTE)
+	};
+
 	Shader shaderProgram("default.vert", "default.frag");
 
-	VAO VAO1;
-
-	VAO1.Bind();
+	std::vector <Vertex> verts(vertices, vertices + sizeof(vertices) / sizeof(Vertex));
+	std::vector <GLuint> ind(indices, indices + sizeof(indices) / sizeof(GLuint));
+	std::vector <Texture> tex(textures, textures + sizeof(textures) / sizeof(Texture));
+	Mesh floor(verts, ind, tex);
 	
-	VBO VBO1(vertices, sizeof(vertices));
-	EBO EBO1(indices, sizeof(indices));
-
-	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
-	VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
-	VAO1.LinkAttrib(VBO1, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
-	VAO1.LinkAttrib(VBO1, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
-	VAO1.Unbind();
-	VBO1.Unbind();
-	EBO1.Unbind();
 
 	Shader lightShader("light.vert", "light.frag");
 
-	VAO lightVAO;
-	lightVAO.Bind();
-
-	VBO lightVBO(lightVertices, sizeof(lightVertices));
-	EBO lightEBO(lightIndices, sizeof(lightIndices));
-
-	lightVAO.LinkAttrib(lightVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
-
-	lightVAO.Unbind();
-	lightVBO.Unbind();
-	lightEBO.Unbind();
+	std::vector <Vertex> lightVerts(lightVertices, lightVertices + sizeof(lightVertices) / sizeof(Vertex));
+	std::vector <GLuint> lightInd(lightIndices, lightIndices + sizeof(lightIndices) / sizeof(GLuint));
+	Mesh light(lightVerts, lightInd, tex);
 
 	glm::vec4 lightColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 
@@ -187,10 +207,6 @@ int main() {
 	glUniform3f(glGetUniformLocation(shaderProgram.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
 
 	GLuint uniID = glGetUniformLocation(shaderProgram.ID, "scale");
-
-	Texture vittor("Vittor.png", GL_TEXTURE_2D, 0, GL_RGB, GL_UNSIGNED_BYTE);
-	vittor.texUnit(shaderProgram, "tex0", 0);
-	Texture vittorSpec("Vittor_Specular.png", GL_TEXTURE_2D, 1, GL_RED, GL_UNSIGNED_BYTE);
 
 	float prevTime = 0.0;
 	double crntTime = 0.0;
@@ -225,33 +241,16 @@ int main() {
 
 		camera.updateMatrix(45.0f, 0.1f, 100.0f);
 
-		shaderProgram.Activate();
-
-		glUniform3f(glGetUniformLocation(shaderProgram.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
-
-		camera.Matrix(shaderProgram, "camMatrix");
-
-		vittor.Bind();
-		vittorSpec.Bind();
-
-		VAO1.Bind();
-		glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(int), GL_UNSIGNED_INT, 0);
-
-		lightShader.Activate();
-		camera.Matrix(lightShader, "camMatrix");
-		lightVAO.Bind();
-		glDrawElements(GL_TRIANGLES, sizeof(lightIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
+		floor.Draw(shaderProgram, camera);
+		light.Draw(lightShader, camera);
 
 		glfwSwapBuffers(window);
 
 		glfwPollEvents(); //Gere les evenements de la fenetre
 	}
 
-	VAO1.Delete();
-	VBO1.Delete();
-	EBO1.Delete();
-	vittor.Delete();
 	shaderProgram.Delete();
+	lightShader.Delete();
 
 	glfwDestroyWindow(window);
 	glfwTerminate();
