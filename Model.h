@@ -18,8 +18,8 @@ class Model {
 		json JSON;
 
 		std::vector<Mesh> meshes;
-		std::vector<glm::vec3> translationMeshes;
-		std::vector<glm::quat> rotationMeshes;
+		std::vector<glm::vec3> translationsMeshes;
+		std::vector<glm::quat> rotationsMeshes;
 		std::vector<glm::vec3> scalesMeshes;
 		std::vector<glm::mat4> matricesMeshes;
 

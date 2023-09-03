@@ -1,15 +1,14 @@
-#include"Mesh.h"
+#include "Mesh.h"
 
-Mesh::Mesh(std::vector <Vertex>& vertices, std::vector <GLuint>& indices, std::vector <Texture>& textures) {
+Mesh::Mesh(std::vector <Vertex>& vertices, std::vector <GLuint>& indices, std::vector <Texture>& textures)
+{
 	Mesh::vertices = vertices;
 	Mesh::indices = indices;
 	Mesh::textures = textures;
 
 	VAO.Bind();
-
 	VBO VBO(vertices);
 	EBO EBO(indices);
-
 	VAO.LinkAttrib(VBO, 0, 3, GL_FLOAT, sizeof(Vertex), (void*)0);
 	VAO.LinkAttrib(VBO, 1, 3, GL_FLOAT, sizeof(Vertex), (void*)(3 * sizeof(float)));
 	VAO.LinkAttrib(VBO, 2, 3, GL_FLOAT, sizeof(Vertex), (void*)(6 * sizeof(float)));
@@ -19,16 +18,16 @@ Mesh::Mesh(std::vector <Vertex>& vertices, std::vector <GLuint>& indices, std::v
 	EBO.Unbind();
 }
 
+
 void Mesh::Draw
 (
-	Shader& shader, 
+	Shader& shader,
 	Camera& camera,
 	glm::mat4 matrix,
-	glm::vec3 translation, 
-	glm::quat rotation, 
+	glm::vec3 translation,
+	glm::quat rotation,
 	glm::vec3 scale
-
-) 
+)
 {
 	shader.Activate();
 	VAO.Bind();
@@ -43,7 +42,8 @@ void Mesh::Draw
 		if (type == "diffuse")
 		{
 			num = std::to_string(numDiffuse++);
-		} else if (type == "specular")
+		}
+		else if (type == "specular")
 		{
 			num = std::to_string(numSpecular++);
 		}
@@ -53,7 +53,7 @@ void Mesh::Draw
 	glUniform3f(glGetUniformLocation(shader.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
 	camera.Matrix(shader, "camMatrix");
 
-	glm::mat4 trans = glm::translate(trans, translation);
+	glm::mat4 trans = glm::mat4(1.0f);
 	glm::mat4 rot = glm::mat4(1.0f);
 	glm::mat4 sca = glm::mat4(1.0f);
 
