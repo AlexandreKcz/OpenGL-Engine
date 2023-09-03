@@ -19,6 +19,9 @@
     <Filter Include="Fichiers de ressources\Textures">
       <UniqueIdentifier>{34c4fd4d-0208-4c33-8123-974542c1b0ea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers de ressources\Models">
+      <UniqueIdentifier>{47eb44f1-e5e9-48da-b2d2-53634c42e709}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="glad.c">
@@ -51,6 +54,9 @@
     <ClCompile Include="Mesh.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="default.vert">
@@ -64,6 +70,15 @@
     </None>
     <None Include="light.vert">
       <Filter>Fichiers de ressources\Shaders</Filter>
+    </None>
+    <None Include="models\maoi.gltf">
+      <Filter>Fichiers de ressources\Models</Filter>
+    </None>
+    <None Include="models\scene.bin">
+      <Filter>Fichiers de ressources\Models</Filter>
+    </None>
+    <None Include="models\scene.gltf">
+      <Filter>Fichiers de ressources\Models</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -88,12 +103,18 @@
     <ClInclude Include="Mesh.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\..\..\Downloads\Vittor.png">
       <Filter>Fichiers de ressources\Textures</Filter>
     </Image>
     <Image Include="Vittor_Specular.png">
+      <Filter>Fichiers de ressources\Textures</Filter>
+    </Image>
+    <Image Include="models\textures\Object001_mtl_baseColor.jpeg">
       <Filter>Fichiers de ressources\Textures</Filter>
     </Image>
   </ItemGroup>
