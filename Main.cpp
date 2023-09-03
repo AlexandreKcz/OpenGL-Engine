@@ -64,7 +64,7 @@ int main() {
 
 	Camera camera(width, height, glm::vec3(0.0f, 0.0f, 2.0f));
 
-	Model model("models/scene.gltf");
+	Model model("models/moai/moyMagique.gltf");
 
 	while (!glfwWindowShouldClose(window)) {
 
