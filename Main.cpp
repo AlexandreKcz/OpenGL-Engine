@@ -24,9 +24,24 @@ extern "C"
 const unsigned int width = 800;
 const unsigned int height = 800;
 
-//Coordonees des vertices (il triangulo)
+
+//Plane
 GLfloat vertices[] = {
-	/* Coordonees :				Couleurs : 					UV:					Normals : */
+	-1.0f,	0.0f,	1.0f,		0.0f,	0.0f,	0.0f,		0.0f,	0.0f,		0.0f,	1.0f,	0.0f,
+	-1.0f,	0.0f,	-1.0f,		0.0f,	0.0f,	0.0f,		0.0f,	1.0f,		0.0f,	1.0f,	0.0f,
+	1.0f,	0.0f,	-1.0f,		0.0f,	0.0f,	0.0f,		1.0f,	1.0f,		0.0f,	1.0f,	0.0f,
+	1.0f,	0.0f,	1.0f,		0.0f,	0.0f,	0.0f,		1.0f,	0.0f,		0.0f,	1.0f,	0.0f
+};
+
+GLuint indices[] = {
+	0,1,2,
+	0,2,3
+};
+
+//Coordonees des vertices (il piramido)
+/*
+GLfloat vertices[] = {*/
+	/* Coordonees :				Couleurs : 					UV:					Normals : *//*
 	-0.5f,	0.0f,	0.5f,		0.83f, 0.70f, 0.44f,		0.0f,	0.0f,		0.0f, -1.0f, 0.0f,
 	-0.5f,	0.0f,	-0.5f,		0.83f, 0.70f, 0.44f,		0.0f,	5.0f,		0.0f, -1.0f, 0.0f,
 	0.5f,	0.0f,	-0.5f,		0.83f, 0.70f, 0.44f,		5.0f,	5.0f,		0.0f, -1.0f, 0.0f,
@@ -56,7 +71,7 @@ GLuint indices[] = {
 	7,9,8,
 	10,12,11,
 	13,15,14
-};
+};*/
 
 GLfloat lightVertices[] = {
 	-0.1f, -0.1f, 0.1f,
@@ -173,8 +188,9 @@ int main() {
 
 	GLuint uniID = glGetUniformLocation(shaderProgram.ID, "scale");
 
-	Texture vittor("Vittor.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGB, GL_UNSIGNED_BYTE);
+	Texture vittor("Vittor.png", GL_TEXTURE_2D, 0, GL_RGB, GL_UNSIGNED_BYTE);
 	vittor.texUnit(shaderProgram, "tex0", 0);
+	Texture vittorSpec("Vittor_Specular.png", GL_TEXTURE_2D, 1, GL_RED, GL_UNSIGNED_BYTE);
 
 	float prevTime = 0.0;
 	double crntTime = 0.0;
@@ -216,6 +232,8 @@ int main() {
 		camera.Matrix(shaderProgram, "camMatrix");
 
 		vittor.Bind();
+		vittorSpec.Bind();
+
 		VAO1.Bind();
 		glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(int), GL_UNSIGNED_INT, 0);
 

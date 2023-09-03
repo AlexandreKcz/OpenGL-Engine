@@ -87,5 +87,8 @@
     <Image Include="..\..\..\..\..\..\Downloads\Vittor.png">
       <Filter>Fichiers de ressources\Textures</Filter>
     </Image>
+    <Image Include="Vittor_Specular.png">
+      <Filter>Fichiers de ressources\Textures</Filter>
+    </Image>
   </ItemGroup>
 </Project>
