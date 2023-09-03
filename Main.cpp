@@ -13,13 +13,13 @@
 #include"Texture.h"
 #include"Camera.h"
 
-//#include <wtypes.h> //pour DWORD pour le gpu nvidia
-/* pour activer le gpu nvidia ? (les uv bug bruh)
+#include <wtypes.h> //pour DWORD pour le gpu nvidia
+/* pour activer le gpu nvidia ? (les uv bug bruh)*/
 extern "C"
 {
 	//__declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 1;
 	__declspec(dllexport) DWORD NvOptimusEnablement = 0x00000001;
-}*/
+};
 
 const unsigned int width = 800;
 const unsigned int height = 800;
