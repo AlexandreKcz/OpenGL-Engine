@@ -1,11 +1,11 @@
-C:\Users\myale\OneDrive\Documents\Perso\Projet Perso\Open GL\OpenGL Engine\Camera.cpp;C:\Users\myale\OneDrive\Documents\Perso\Projet Perso\Open GL\OpenGL Engine\x64\Debug\Camera.obj
-C:\Users\myale\OneDrive\Documents\Perso\Projet Perso\Open GL\OpenGL Engine\EBO.cpp;C:\Users\myale\OneDrive\Documents\Perso\Projet Perso\Open GL\OpenGL Engine\x64\Debug\EBO.obj
-C:\Users\myale\OneDrive\Documents\Perso\Projet Perso\Open GL\OpenGL Engine\glad.c;C:\Users\myale\OneDrive\Documents\Perso\Projet Perso\Open GL\OpenGL Engine\x64\Debug\glad.obj
-C:\Users\myale\OneDrive\Documents\Perso\Projet Perso\Open GL\OpenGL Engine\Main.cpp;C:\Users\myale\OneDrive\Documents\Perso\Projet Perso\Open GL\OpenGL Engine\x64\Debug\Main.obj
-C:\Users\myale\OneDrive\Documents\Perso\Projet Perso\Open GL\OpenGL Engine\Mesh.cpp;C:\Users\myale\OneDrive\Documents\Perso\Projet Perso\Open GL\OpenGL Engine\x64\Debug\Mesh.obj
-C:\Users\myale\OneDrive\Documents\Perso\Projet Perso\Open GL\OpenGL Engine\Model.cpp;C:\Users\myale\OneDrive\Documents\Perso\Projet Perso\Open GL\OpenGL Engine\x64\Debug\Model.obj
-C:\Users\myale\OneDrive\Documents\Perso\Projet Perso\Open GL\OpenGL Engine\shaderClass.cpp;C:\Users\myale\OneDrive\Documents\Perso\Projet Perso\Open GL\OpenGL Engine\x64\Debug\shaderClass.obj
-C:\Users\myale\OneDrive\Documents\Perso\Projet Perso\Open GL\OpenGL Engine\stb.cpp;C:\Users\myale\OneDrive\Documents\Perso\Projet Perso\Open GL\OpenGL Engine\x64\Debug\stb.obj
-C:\Users\myale\OneDrive\Documents\Perso\Projet Perso\Open GL\OpenGL Engine\Texture.cpp;C:\Users\myale\OneDrive\Documents\Perso\Projet Perso\Open GL\OpenGL Engine\x64\Debug\Texture.obj
-C:\Users\myale\OneDrive\Documents\Perso\Projet Perso\Open GL\OpenGL Engine\VAO.cpp;C:\Users\myale\OneDrive\Documents\Perso\Projet Perso\Open GL\OpenGL Engine\x64\Debug\VAO.obj
-C:\Users\myale\OneDrive\Documents\Perso\Projet Perso\Open GL\OpenGL Engine\VBO.cpp;C:\Users\myale\OneDrive\Documents\Perso\Projet Perso\Open GL\OpenGL Engine\x64\Debug\VBO.obj
+C:\Users\myale\Documents\Perso\OpenGL-Engine\Camera.cpp;C:\Users\myale\Documents\Perso\OpenGL-Engine\x64\Debug\Camera.obj
+C:\Users\myale\Documents\Perso\OpenGL-Engine\EBO.cpp;C:\Users\myale\Documents\Perso\OpenGL-Engine\x64\Debug\EBO.obj
+C:\Users\myale\Documents\Perso\OpenGL-Engine\glad.c;C:\Users\myale\Documents\Perso\OpenGL-Engine\x64\Debug\glad.obj
+C:\Users\myale\Documents\Perso\OpenGL-Engine\Main.cpp;C:\Users\myale\Documents\Perso\OpenGL-Engine\x64\Debug\Main.obj
+C:\Users\myale\Documents\Perso\OpenGL-Engine\Mesh.cpp;C:\Users\myale\Documents\Perso\OpenGL-Engine\x64\Debug\Mesh.obj
+C:\Users\myale\Documents\Perso\OpenGL-Engine\Model.cpp;C:\Users\myale\Documents\Perso\OpenGL-Engine\x64\Debug\Model.obj
+C:\Users\myale\Documents\Perso\OpenGL-Engine\shaderClass.cpp;C:\Users\myale\Documents\Perso\OpenGL-Engine\x64\Debug\shaderClass.obj
+C:\Users\myale\Documents\Perso\OpenGL-Engine\stb.cpp;C:\Users\myale\Documents\Perso\OpenGL-Engine\x64\Debug\stb.obj
+C:\Users\myale\Documents\Perso\OpenGL-Engine\Texture.cpp;C:\Users\myale\Documents\Perso\OpenGL-Engine\x64\Debug\Texture.obj
+C:\Users\myale\Documents\Perso\OpenGL-Engine\VAO.cpp;C:\Users\myale\Documents\Perso\OpenGL-Engine\x64\Debug\VAO.obj
+C:\Users\myale\Documents\Perso\OpenGL-Engine\VBO.cpp;C:\Users\myale\Documents\Perso\OpenGL-Engine\x64\Debug\VBO.obj

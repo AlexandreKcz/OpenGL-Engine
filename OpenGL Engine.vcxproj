@@ -75,8 +75,8 @@
     <LibraryPath>C:\Users\myale\OneDrive\Documents\Perso\Projet Perso\Open GL\OpenGL Engine\Libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\myale\OneDrive\Documents\Perso\Projet Perso\Open GL\OpenGL Engine\Libraries\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\myale\OneDrive\Documents\Perso\Projet Perso\Open GL\OpenGL Engine\Libraries\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\myale\Documents\Perso\Moy-Engine\Libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\myale\Documents\Perso\Moy-Engine\Libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
